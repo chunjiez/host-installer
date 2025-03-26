@@ -182,7 +182,7 @@ def clearModelessDialog(screen):
     screen.popWindow()
 
 def TableDialog(screen, title, *table):
-    wrap_value = 35
+    wrap_value = 40
 
     gf = GridFormHelp(screen, title, None, 1, 2)
     bb = ButtonBar(screen, [ 'Ok' ])
@@ -194,8 +194,8 @@ def TableDialog(screen, title, *table):
             max_label = len(label)
         if len(value) > max_value:
             max_value = len(value)
-    if max_label > 15:
-        max_label = 15
+    if max_label > 20:
+        max_label = 20
     if max_value > wrap_value:
         max_value = wrap_value
 
