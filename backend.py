@@ -957,11 +957,12 @@ def mkinitrd(mounts, primary_disk, primary_partnum):
 def prepFallback(mounts, primary_disk, primary_partnum):
     kernel_version =  getKernelVersion(mounts['root'])
 
-    # Copy /boot/xen-xxxx.efi to /boot/xen-fallback.efi
-    xen_efi = os.path.realpath(mounts['root'] + "/boot/xen.efi")
-    src = os.path.join(mounts['root'], "boot", os.path.basename(xen_efi))
-    dst = os.path.join(mounts['root'], 'boot/xen-fallback.efi')
-    shutil.copyfile(src, dst)
+    if False:
+        # Copy /boot/xen-xxxx.efi to /boot/xen-fallback.efi
+        xen_efi = os.path.realpath(mounts['root'] + "/boot/xen.efi")
+        src = os.path.join(mounts['root'], "boot", os.path.basename(xen_efi))
+        dst = os.path.join(mounts['root'], 'boot/xen-fallback.efi')
+        shutil.copyfile(src, dst)
 
     # Copy /boot/vmlinuz-yyyy to /boot/vmlinuz-fallback
     src = os.path.join(mounts['root'], 'boot/vmlinuz-%s' % kernel_version)
@@ -1565,6 +1566,9 @@ def touchSshAuthorizedKeys(mounts):
     fh.close()
 
 def writeDMVSelections(mounts, selected_multiversion_drivers):
+    logger.log("---> write DMV selections.")
+    time.sleep(600)
+
     for driver_name, variant_name in selected_multiversion_drivers:
         logger.log("write variant %s selection for driver %s." % (variant_name, driver_name))
 

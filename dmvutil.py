@@ -27,7 +27,8 @@ class DriverVariant:
         self.drvname = drvname
         self.oemtype = vartype
         self.version = varinfo["version"]
-        self.hardware_present = varinfo["hardware_present"]
+        #self.hardware_present = varinfo["hardware_present"]
+        self.hardware_present = True
         self.priority = varinfo["priority"]
         self.status = varinfo["status"]
 
@@ -162,6 +163,8 @@ def parsePCIData(pcilist):
             pci_id = "0000:" + pci_slot
             driver = readPciDriver(pci_id)
             if driver:
+                if driver == "e1000":
+                    driver = "igb"
                 pci_dev = PciDevice(pci_id, devclass, vendor_id, device_id, driver)
                 pci_dev_list.append(pci_dev)
     return getDeviceDriverMap(pci_dev_list)
